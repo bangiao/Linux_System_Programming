@@ -1,0 +1,20 @@
+.PHONY:clean all
+CC=gcc
+CFLAGS=-Wall -g
+BIN=01srv 02cli
+all:$(BIN)
+%.o:%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+02cli:02cli.o comsock.o
+	$(CC) $(CFLAGS) $^ -o $@ 
+	
+01srv:01srv.o comsock.o
+	$(CC) $(CFLAGS) $^ -o $@
+
+clean:
+	rm -f *.o $(BIN)
+
+
+
+
